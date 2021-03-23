@@ -1,22 +1,26 @@
+.div {
+    margin: 0px;
+}
+
 #container {
     margin: 50px auto;
     height: 800px;
     width: 1300px;
     background-color: red;
+    display: flex;
 }
 
 #side {
     width: 25%;
     padding: 0;
-   
     height: 100%;
     background-color: #393351;
 }
 
+
 #personal-profile{
     height: 100px;
     width: 100%;
-   
     padding-bottom: 10px;
     margin-bottom: 10px;
     background-color: cadetblue;
@@ -25,12 +29,60 @@
 #search-filter{
     height: 50px;
     width: 100%;
-   
+    margin-bottom: 10px;
     background-color: chocolate;
 }
 
 #nav-contacts{
  
-    position: fixed;
-    background-color: red;
+    height: 619px;
+    width: 100%;
+    background-color: rgb(25, 0, 247);
+}
+
+#main{
+    overflow: auto;
+    width: 75%;
+    height: 100%;
+    background-color: #1e0e61;
+    display: flex;
+    flex-wrap: wrap;
+  
+    
+}
+
+#group1{
+ width: auto;
+ 
+}
+#group2{
+    margin-left: auto;
+}
+
+
+#contact-bar{
+width: 500px ;
+height: 60px;
+background-color: slateblue;
+margin: 20px auto 0px 65px;
+padding: 0;
+
+
+
+}
+
+#contact-conversation{
+    margin:15px 5px 0px 17px;
+    width: 600px;
+    height: 619px;
+    background-color: violet;
+}
+
+#contactprofile{
+    background-color: rgb(165, 9, 165);
+    height: 100%;
+    width: 340px;
+    padding: 0;
+ 
+
 }
