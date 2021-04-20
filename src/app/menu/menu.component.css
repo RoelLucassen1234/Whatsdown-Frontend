@@ -27,14 +27,18 @@
 }
 
 #search-filter{
+    display: grid;
     height: 50px;
     width: 100%;
     margin-bottom: 10px;
     background-color: chocolate;
 }
-
+#icons{
+    grid-row: 1;
+    width: 45px;
+    margin: auto;
+}
 #nav-contacts{
- 
     height: 619px;
     width: 100%;
     background-color: rgb(25, 0, 247);
@@ -61,6 +65,7 @@
 
 
 #contact-bar{
+display: flex;    
 width: 500px ;
 height: 60px;
 background-color: slateblue;
@@ -75,7 +80,12 @@ padding: 0;
     margin:15px 5px 0px 17px;
     width: 600px;
     height: 619px;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
     background-color: violet;
+    overflow: auto;
+    
 }
 
 #contactprofile{
@@ -86,3 +96,86 @@ padding: 0;
  
 
 }
+
+
+#contact {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    height: 65px;
+    width: 100%;
+    padding-top: 1px;
+    
+}
+
+#contact-picture{
+    padding: 0 15px 0 7px;
+}
+
+#contact-image img{
+    width:  60px;
+    height: 60px;
+}
+#contact-image img{
+    border-radius: 50%;
+}
+
+#contact-info{
+    width: 100%;
+    border-top-color: var(--background-default-active);
+    border-color: #f44336!important;
+    border-bottom: 1px solid rgb(155, 145, 145)!important;
+}
+
+#top-info {
+    display: flex;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+#bot-info{
+    display: flex;
+}
+
+
+#contact-name{
+width: 75%;
+font-size:larger;
+}
+#contact-date{
+width: 25%;
+margin: auto;
+}
+
+#contact-bar{
+    display: flex;
+}
+
+
+
+#contact-recent-message{
+
+}
+
+.messsage{
+    margin : 10px;
+    padding-left: 5px;
+    padding-top: 3px;
+    padding-right: 3px;
+    padding-bottom: 3px;
+    background-color: #056162;
+    color: #c7c8ca;
+    flex-grow: 0;
+    min-width: 20%;
+    max-width: 45%;
+    border-radius: 5px;
+    height: auto;
+  
+}
+
+.MyMessage{
+    align-self: flex-end;
+    background-color: #262d31;
+}
+
+/* Style the tab */

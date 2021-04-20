@@ -1,48 +1,175 @@
 <html>
-    <body>
+
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script type="text/javascript" language="javascript" src="../JS/bmwcustom.js"></script>
+</head>
+
+<body>
     <div id="container">
         <div id="side">
             <div id="personal-profile">
 
             </div>
-            
+
             <div id="search-filter">
 
+                <img id="icons" class="tablinks" src="../../assets/img/icons8-person-90.png"
+                    (click)="switchTab('contact')">
+                <img id="icons" class="tablinks" src="../../assets/img/icons-grouping.png" (click)="switchTab('group')">
+                <img id="icons" class="tablinks" src="../../assets/img/icons8-star-96.png"
+                    (click)="switchTab('favorite')">
             </div>
 
             <div id="nav-contacts">
+                <div *ngIf="currentTab =='contact'" id="contacts">
 
+                    <div id="contact" *ngFor="let item of this.normals;" (click)='getMockMessages()'>
+                        <div id="contact-picture">
+                            <div id="contact-image">
+                                <img src="../../assets/img/duck.jpg">
+                            </div>
+                        </div>
+                        <div id="contact-info">
+                            <div id="top-info">
+                                <div id="contact-name">
+                                    <span>{{item.name}}</span>
+                                </div>
+                                <div id="contact-date">
+                                    <span>date</span>
+                                </div>
+                            </div>
+                            <div id="bot-info">
+                                <div id="contact-last-messanger">
+                                    <span>{{item.lastMessagedName}}:</span>
+                                </div>
+                                <div id="contact-last-message">
+                                    <span>{{item.lastMessagedMessage}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div *ngIf="currentTab =='group'" id="contacts">
+                    <div id="contact" *ngFor="let item of this.group;">
+                        <div id="contact-picture">
+                            <div id="contact-image">
+                                <img src="../../assets/img/duck.jpg">
+                            </div>
+                        </div>
+                        <div id="contact-info">
+                            <div id="top-info">
+                                <div id="contact-name">
+                                    <span>{{item.name}}</span>
+                                </div>
+                                <div id="contact-date">
+                                    <span>date</span>
+                                </div>
+                            </div>
+                            <div id="bot-info">
+                                <div id="contact-last-messanger">
+                                    <span>{{item.lastMessagedName}}:</span>
+                                </div>
+                                <div id="contact-last-message">
+                                    <span>{{item.lastMessagedMessage}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div *ngIf="currentTab =='favorite'" id="contacts">
+                    <div id="contact" *ngFor="let item of this.favorites;">
+                        <div id="contact-picture">
+                            <div id="contact-image">
+                                <img src="../../assets/img/duck.jpg">
+                            </div>
+                        </div>
+                        <div id="contact-info">
+                            <div id="top-info">
+                                <div id="contact-name">
+                                    <span>{{item.name}}</span>
+                                </div>
+                                <div id="contact-date">
+                                    <span>date</span>
+                                </div>
+                            </div>
+                            <div id="bot-info">
+                                <div id="contact-last-messanger">
+                                    <span>{{item.lastMessagedName}}:</span>
+                                </div>
+                                <div id="contact-last-message">
+                                    <span>{{item.lastMessagedMessage}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-       
+
         <div id="main">
-        <div id="group1"> 
-            <div id="contact-bar">
-
-            </div>
-           
-            <div id="contact-conversation">
-
-            </div>
-       
-       
-       
-        </div>
-        <div id="group2"> 
-            <div id="contactprofile">
-
-            </div>
-        </div>
-   
+            <div id="group1">
             
+
+                <div id="contact-conversation">
+
+                    <div class="messsage" *ngFor="let item of this.messages; "
+                        [ngClass]="item.senderID == '1231' ? 'MyMessage':''">
+                        <span>hello</span>
+                    </div>
+                </div>
+            </div>
+            <div id="group2">
+                <div id="contactprofile">
+
+                </div>
+            </div>
+
+
             <div id="contact-conversation-bar">
 
             </div>
-            
 
-            
+
+
         </div>
- 
+
     </div>
-    </body>
+
+    <script>
+
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>
+    <script>
+
+        function openMessages(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>
+</body>
+
 </html>
