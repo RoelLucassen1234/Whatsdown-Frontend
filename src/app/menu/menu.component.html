@@ -9,7 +9,16 @@
     <div id="container">
         <div id="side">
             <div id="personal-profile">
-
+                <div id="personal-profile-image">
+                    <img src="../../assets/img/duck.jpg">
+                </div>
+                <div id="personal-profile-status">
+                    <div><span>Personal name</span></div>
+                <div><span style="font-size:12px;"><i>Status, a long statusddddddddddddddddddd</i></span></div>
+                </div>
+                <div id="personal-profile-more">
+             <img src="../../assets/img/icons8-male-user-48.png">
+                </div>
             </div>
 
             <div id="search-filter">
@@ -111,8 +120,6 @@
 
         <div id="main">
             <div id="group1">
-            
-
                 <div id="contact-conversation">
 
                     <div class="messsage" *ngFor="let item of this.messages; "
@@ -123,7 +130,22 @@
             </div>
             <div id="group2">
                 <div id="contactprofile">
-
+                    <div id="contact-profile-image">
+                        <img src="../../assets/img/duck.jpg">
+                        <p class="contact-profile-image-name">Product</p>
+                        <p class="contact-profile-image-status">The status of the contact/group</p>
+                    </div>
+                    <div id="contact-profile-actions">
+                        <div id="contact-profile-actions-buttons"> 
+                            <button style="margin-right: 5px;"> Remove Friend</button>
+                            <button> Block Friend</button>
+                        </div>
+                        <div id="contact-profile-actions-buttons"> 
+                            <button style="margin-right: 5px;"> Favorite Friend</button>
+                        </div>
+                      
+                     
+                    </div> 
                 </div>
             </div>
 
@@ -131,9 +153,6 @@
             <div id="contact-conversation-bar">
 
             </div>
-
-
-
         </div>
 
     </div>

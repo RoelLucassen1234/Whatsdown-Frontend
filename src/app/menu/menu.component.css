@@ -51,8 +51,6 @@
     background-color: #1e0e61;
     display: flex;
     flex-wrap: wrap;
-  
-    
 }
 
 #group1{
@@ -84,19 +82,46 @@ padding: 0;
     align-items: flex-start;
     flex-direction: column;
     background-color: violet;
-    overflow: auto;
-    
+    overflow: auto;  
 }
+
 
 #contactprofile{
     background-color: rgb(165, 9, 165);
     height: 100%;
     width: 340px;
     padding: 0;
- 
-
+    align-content: center;
+    text-align: center;
+}
+#contact-profile-image {
+   background: darkblue;
+}
+.contact-profile-image-name{
+    font-size: 20px;
+    color: darkgrey;
+    font-weight: 600;
+    margin-bottom: 0px;
+}
+.contact-profile-image-status{
+    margin-top: 0px;
+    font-size: 12px;
+    color: darkgrey;
+    font-weight: 600;
 }
 
+#contact-profile-actions{
+    display: grid;
+    align-items: center;
+    height: 50px;
+    background: darkblue;
+    justify-content: center;
+}
+
+#contact-profile-buttons button{
+    width: 91px;
+    height: 15px;
+}
 
 #contact {
     position: relative;
@@ -153,6 +178,7 @@ margin: auto;
 
 
 
+
 #contact-recent-message{
 
 }
@@ -178,4 +204,38 @@ margin: auto;
     background-color: #262d31;
 }
 
+
+#contact-profile-image img{
+    width:  200px;
+    height: 200px;
+    border-radius: 50%;
+}
 /* Style the tab */
+#personal-profile-image{
+margin-left: px;
+}
+#personal-profile-image img{
+    width:  80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+#personal-profile{
+   display: flex;
+   align-items: center;
+}
+
+#personal-profile-status{
+    width: 170px;
+    overflow-wrap: break-word;
+    margin: auto;
+}
+
+#personal-profile-more img{
+    width: 60px;
+    height: 60px;
+}
+#personal-profile-more{
+    width: 60px;
+    height: 60px;
+}
