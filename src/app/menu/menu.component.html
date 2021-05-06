@@ -2,22 +2,42 @@
 
 <head>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script type="text/javascript" language="javascript" src="../JS/bmwcustom.js"></script>
 </head>
 
 <body>
+   
     <div id="container">
+        <div *ngIf="!menuIsActive" [@inOutAnimation] class="profilemenu">
+            <div class="returnProfile" (click)="toggle()">
+                <img src="../../assets/img/left-arrow.png" >
+                <span id="returnSpan">Return </span>
+            </div>
+            <div id="personal-contact-profile-image">
+                <span>Your image</span>
+                <img src="../../assets/img/duck.jpg">
+            </div>
+            <div id="personal-contact-profile-name">
+                <span>Your name</span>
+                <input type="text" id="fname" value="{{this.myProfile.profile.displayName}}" name="fname">
+            </div>
+            <div id="personal-contact-profile-name">
+                <span>Your status</span>
+                <input type="text" id="fname" value="{{this.myProfile.profile.status}}" name="fname">
+            </div>
+        </div>
         <div id="side">
             <div id="personal-profile">
-                <div id="personal-profile-image">
+                <div id="personal-profile-image" (click)="toggle()">
                     <img src="../../assets/img/duck.jpg">
                 </div>
                 <div id="personal-profile-status">
                     <div><span>Personal name</span></div>
                 <div><span style="font-size:12px;"><i>Status, a long statusddddddddddddddddddd</i></span></div>
-                </div>
-                <div id="personal-profile-more">
-             <img src="../../assets/img/icons8-male-user-48.png">
+                </div> 
+                <div id="profile-options-button" (click)="toggleSearchMenu()">
+                    <img src="../../assets/img/icons8-menu-48 (1).png">
                 </div>
             </div>
 
@@ -119,15 +139,49 @@
         </div>
 
         <div id="main">
+            <div *ngIf="!friendMenuIsActive" [@inOutAnimation] class="search-menu">
+                <div class="returnProfile" (click)="toggleSearchMenu()">
+                    <img src="../../assets/img/icons8-macos-close-32.png" >
+                    <span id="returnSpan">Return </span>
+                </div>
+                <div id="search-container">
+                <form [formGroup]="searchdata" #userlogin (submit)= "onClickSearchContacts()"> 
+                    <input type="search" formControlName="contactsearch" class="contact-searchbar">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+                </div>
+                <div id="contact" *ngFor="let item of this.potentialContacts">
+                    <div id="contact-picture">
+                        <div id="contact-image">
+                            <img src="../../assets/img/duck.jpg">
+                        </div>
+                    </div>
+                    <div id="contact-info">
+                        <div id="top-info">
+                            <div id="contact-name">
+                                <span>contact name</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div id="group1">
                 <div id="contact-conversation">
 
                     <div class="messsage" *ngFor="let item of this.messages; "
                         [ngClass]="item.senderID == '1231' ? 'MyMessage':''">
-                        <span>hello</span>
+                        <span>{{item.message}}</span>
                     </div>
+                    
                 </div>
-            </div>
+                <div id="contact-conversation-bar">
+                    <div id="emote-icon">   <img src="../../assets/img/icons-grouping.png" style="width: 35px; height: 35px;"></div>
+                    <div id="emote-icon">   <img src="../../assets/img/icons-grouping.png" style="width: 35px; height: 35px;"></div>
+                    <div id="text-input"><textarea 
+                        class="expandable-textarea" id="message" [(ngModel)]="message" role="textbox"  contenteditable >Your default value </textarea> </div>
+                    <div id="emote-icon"><button id="conversation-input-button" (click)="sendMessage()">Send</button></div>
+                </div>
+           </div>
             <div id="group2">
                 <div id="contactprofile">
                     <div id="contact-profile-image">
@@ -143,16 +197,13 @@
                         <div id="contact-profile-actions-buttons"> 
                             <button style="margin-right: 5px;"> Favorite Friend</button>
                         </div>
-                      
-                     
+
                     </div> 
                 </div>
             </div>
 
 
-            <div id="contact-conversation-bar">
-
-            </div>
+           
         </div>
 
     </div>

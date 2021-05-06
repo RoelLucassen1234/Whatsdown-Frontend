@@ -1,27 +1,85 @@
-import { Component, OnInit } from '@angular/core';
+import { animate, style, transition, trigger } from '@angular/animations';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { FriendDTO } from '../Dto/friend-dto';
 import { MessageDTO } from '../Dto/message-dto';
+import { PotentialContactView } from '../models/potential-contact-view';
+import { Profile } from '../models/profile';
+import { User } from '../models/user';
+import { ContactService } from '../services/contact.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.css']
+  styleUrls: ['./menu.component.css'],
+  animations: [
+    trigger(
+      'inOutAnimation', 
+      [
+        transition(
+          ':enter', 
+          [
+            style({ width: 0, height: 800, opacity: 1 }),
+            animate('0.4s ease-out', 
+                    style({ width: 325, opacity: 1 }))
+          ]
+        ),
+        transition(
+          ':leave', 
+          [
+            style({ width: 325, opacity: 1 }),
+            animate('0.4s ease-in', 
+                    style({ width: 0, opacity: 0 }))
+          ]
+        )
+      ]
+    )
+  ]
 })
 export class MenuComponent implements OnInit {
+
+   menuIsActive = true;
+   friendMenuIsActive = true;
    currentTab = "contact";
-   myID = '213123';
+
+   myProfile: User;
+   message !: string;
+   searchdata: FormGroup;
+   observableOfSearchParameter : any;
+   
+   potentialContacts : Array<PotentialContactView> = [];
+
+
+
    favorites: Array<FriendDTO> = [];  
    normals: Array<FriendDTO> = [];  
    group: Array<FriendDTO> = [];   
    messages : Array<MessageDTO> = []; 
 
-  constructor() { }
+  constructor(private userService : UserService, private fb: FormBuilder, private contactService : ContactService) { 
+    this.UserInfo();
+   
+   
+    this.searchdata = this.fb.group({
+      contactsearch: new FormControl()
+   });
+   this.observableOfSearchParameter = this.searchdata.controls['contactsearch'];
+  
+   this.observableOfSearchParameter.valueChanges.subscribe(  
+    (value: string) => {  
+      if (value.length > 4){
+        this.onClickSearchContacts();
+      }
+    }
+  );
+  }
 
   ngOnInit(): void {
+    
     this.getMockContacts();
     this.getMockMessages();
   }
-
 
   switchTab(tabName : string) {
     this.currentTab = tabName;
@@ -74,4 +132,42 @@ export class MenuComponent implements OnInit {
    
   }
 
+sendMessage(){
+  console.log(this.message)
+   let myMessage : MessageDTO = new MessageDTO(this.myProfile.userId, this.message, "TEXT", "","123");
+   this.messages.push(myMessage);
+}
+
+UserInfo(){
+   this.userService.getUser().subscribe(
+    (user : any) => {
+      this.myProfile =  user.user;
+    })
+  };
+
+  onClickSearchContacts(){
+    this.contactService.getPotentialContacts(this.searchdata.controls['contactsearch'].value, this.myProfile.profile.userId).subscribe( (contacts : any) => 
+      {
+        console.log(contacts);
+        this.potentialContacts = contacts.profiles;
+        this.test();
+      })
+    
+      console.log(this.potentialContacts);
+   
+  }
+
+toggle(){
+  this.menuIsActive = !this.menuIsActive;
+  console.log(this.myProfile)
+}
+
+toggleSearchMenu(){
+  console.log(this.friendMenuIsActive)
+  this.friendMenuIsActive = !this.friendMenuIsActive;
+}
+
+test(){
+  console.log(this.potentialContacts[0]);
+}
 }
