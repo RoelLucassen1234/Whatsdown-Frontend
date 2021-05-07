@@ -142,11 +142,12 @@ UserInfo(){
    this.userService.getUser().subscribe(
     (user : any) => {
       this.myProfile =  user.user;
+      
     })
   };
 
   onClickSearchContacts(){
-    this.contactService.getPotentialContacts(this.searchdata.controls['contactsearch'].value, this.myProfile.profile.userId).subscribe( (contacts : any) => 
+    this.contactService.getPotentialContacts(this.searchdata.controls['contactsearch'].value, this.myProfile.profile.userId).subscribe((contacts : any) => 
       {
         console.log(contacts);
         this.potentialContacts = contacts.profiles;

@@ -150,21 +150,22 @@
                     <button type="submit"><i class="fa fa-search"></i></button>
                 </form>
                 </div>
-                <div id="contact" *ngFor="let item of this.potentialContacts">
+                <div id="pot-contacts">
+                <div id="pot-contact" *ngFor="let item of this.potentialContacts">
                     <div id="contact-picture">
                         <div id="contact-image">
                             <img src="../../assets/img/duck.jpg">
                         </div>
                     </div>
-                    <div id="contact-info">
-                        <div id="top-info">
-                            <div id="contact-name">
-                                <span>contact name</span>
+                           <div id="pot-contact-name">
+                                <span>{{item.displayName}}</span>
                             </div>
-                        </div>
+                    <div id="pot-contact-request">
+                        <img src="../../assets/img/icons8-approval-24.png">
                     </div>
                 </div>
             </div>
+        </div>
             <div id="group1">
                 <div id="contact-conversation">
 

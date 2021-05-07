@@ -315,6 +315,7 @@ margin: auto;
     width: 635px;
     background-color: rgb(71, 124, 18);
     z-index: 10;
+    overflow: hidden;
 }
 
 #search-container {
@@ -365,4 +366,25 @@ margin: auto;
     width: 200px;
     height: 200px;
     border-radius: 50%;
+}
+
+#pot-contact{
+    display: flex;
+    height: 65px;
+    width: 100%;
+    padding-top: 1px;
+    border-bottom: black 1px solid;
+
+}
+#pot-contacts{
+    overflow: auto;
+}
+#pot-contact-name{
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: x-large;
+}
+
+#pot-contact-request{
+    margin: auto 55px auto auto;
 }
