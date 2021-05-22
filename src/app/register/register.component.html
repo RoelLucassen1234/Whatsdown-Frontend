@@ -1,19 +1,79 @@
-<div class="container"> 
-    <div id="register">
-      <form name='form-register'>
-          <h2 style="margin-top: 0px;">Create your account</h2>
-        <span class="fontawesome-user"></span>
-          <input type="text" id="user" placeholder="Username">
-       
-        <span class="fontawesome-lock"></span>
-          <input type="password" id="pass" placeholder="Password">
-          <span class="fontawesome-lock"></span>
-          <input type="password" id="pass" placeholder="Confirm Password">
+<div class="container">
+  <div id="register">
+    <form [formGroup]="registerData" name='form-register' (submit)="register()">
+      <h2 style="margin-top: 0px;">Create your account</h2>
 
-        <input type="submit" value="Register">
-        <p style="margin-top: 5px; margin-bottom: 0px;"> <a routerLink="/login"> Click here to register</a>  </p>
-        </form>
-        
+
+      <div>
+        <div *ngIf="isSubmitted && registerData.controls.name.invalid">
+          <div class="alert alert-danger" *ngIf="isSubmitted && registerData.controls.name.errors?.required">
+            <small>This field is required</small>
+          </div>
+          <div class="alert alert-danger" *ngIf="isSubmitted && registerData.controls.name.errors?.minlength">
+            <small>Need at least 5 characters</small>
+          </div>
+          <div class="alert alert-danger" *ngIf="isSubmitted && registerData.controls.name.errors?.maxlength">
+            <small>Maximum amount of 25 characters</small>
+          </div>
+          <div class="alert alert-danger" *ngIf="isSubmitted && registerData.controls.name.errors?.pattern">
+            <small>Use only numbers or letters, no special characters allowed</small>
+          </div>
+        </div>
+        <span class="fontawesome-user"></span>
+        <input type="text" formControlName="name" id="user" placeholder="Username" pattern="^([A-Za-z0-9\-\_]+)">
+
+      </div>
+      <div>
+        <div *ngIf="isSubmitted &&registerData.controls.email.invalid">
+          <div class="alert alert-danger" *ngIf="isSubmitted && registerData.controls.email.errors?.required">
+            <small>This field is required</small>
+          </div>
+          <div class="alert alert-danger" *ngIf="isSubmitted && registerData.controls.email.errors?.pattern">
+            <small>Please enter a valid email.</small>
+          </div>
+        </div>
+       
+        <span class="fontawesome-user"></span>
+        <input type="text" formControlName="email" pattern="[a-zA-Z0-9.!#$%&’+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)" id="email" placeholder="Email">
+      </div>
+     
+      <div>
+        <div class="alert alert-danger" *ngIf="isSubmitted && registerData.controls.password.errors?.minlength">
+          <small>Need at least 5 characters</small>
+        </div>
+        <div class="alert alert-danger" *ngIf="isSubmitted && registerData.controls.password.errors?.maxlength">
+          <small>Maximum amount of characters is 200</small>
+        </div>
+      <span class="fontawesome-lock"></span>
+      <input type="password" formControlName="password" id="pass" placeholder="Password">
+      </div>
+      <div>
+      <div *ngIf="isSubmitted && notSame">
+        <div class="alert alert-danger" *ngIf="notSame">
+          <small>Passwords should match</small>
+        </div>
+      </div>
+      <span class="fontawesome-lock"></span>
+      <input type="password" id="confPass" formControlName="confirmPassword" placeholder="Confirm Password">
     </div>
+
+
+      <input type="submit" value="Register">
+      <p style="margin-top: 5px; margin-bottom: 0px;"> <a routerLink="/login"> Click here to login</a> </p>
+    </form>
+
+  </div>
 </div>
 <router-outlet></router-outlet>
+
+<script>
+  function radioButtonsController($scope) {
+    $scope.radioData = [
+      { label: 'Apple', value: 'Apple' },
+      { label: 'Banana', value: 'Banana' },
+      { label: 'Mango', value: 'Mango', isDisabled: true },
+      { label: 'Orange', value: 'Orange' }
+    ];
+    $scope.group = 'Banana';
+  }	
+</script>

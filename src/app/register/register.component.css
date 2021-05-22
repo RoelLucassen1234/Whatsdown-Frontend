@@ -110,3 +110,7 @@ a {
 #register form input[type="submit"]:hover {
   background: #196138;
 }
+
+.alert-danger{
+  color: rgb(187, 21, 21);
+}

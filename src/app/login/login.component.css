@@ -106,3 +106,7 @@ a {
 #login form input[type="submit"]:hover {
   background: #16aa56;
 }
+
+.alert-danger{
+  color: rgb(187, 21, 21);
+}

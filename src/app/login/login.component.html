@@ -7,12 +7,28 @@
 <div class="container"> 
     <div id="login">
       <form name='form-login' [formGroup]="loginForm" (ngSubmit) = "moveOn()">
-        <span class="fontawesome-user"></span>
-          <input type="text" formControlName="email" id="user" placeholder="Email">
        
+        <div>
+          <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+            <div class="alert alert-danger" *ngIf="f.email.errors?.required"><small>This field is required</small></div>
+            <div class="alert alert-danger" *ngIf="f.email.errors?.pattern"><small>Please enter a valid email.</small></div>
+        </div>
+        <span class="fontawesome-user"></span>
+        <input type="text" formControlName="email" id="user" placeholder="Email" pattern="[a-zA-Z0-9.!#$%&’+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)">
+        </div>
+        <div>
+          <div class="alert alert-danger" *ngIf="submitted && f.password.errors?.minlength">
+            <small>Need at least 5 characters</small>
+          </div>
+          <div class="alert alert-danger" *ngIf="submitted && f.password.errors?.maxlength">
+            <small>Maximum amount of characters is 200</small>
+          </div>
+          <div class="alert alert-danger" *ngIf="submitted && f.password.errors?.required">
+            <small>This field is required</small>
+          </div>
         <span class="fontawesome-lock"></span>
-          <input type="password" formControlName="password" id="pass" placeholder="Password">
-        
+        <input type="password" formControlName="password" id="pass" placeholder="Password">
+        </div>
         <input type="submit" value="Login">
         <p style="margin-top: 5px; margin-bottom: 0px;"> <a routerLink="/register"> Click here to register</a> </p>
      
