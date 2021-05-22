@@ -26,6 +26,23 @@
                 <span>Your status</span>
                 <input type="text" id="fname" value="{{this.myProfile.profile.status}}" name="fname">
             </div>
+            <div id="pending-container">
+                <span id="pending-container-span">Pending Requests</span>
+                <div id="pending-request" *ngFor="let item of this.pendingRequests;">
+                    <div id="pending-contact-picture">
+                        <div id="pending-contact-image">
+                            <img src="../../assets/img/duck.jpg">
+                        </div>
+                    </div>
+                           <div id="pending-contact-name">
+                                <span>{{item.displayName}}</span>
+                            </div>
+                    <div id="pending-contact-request">
+                        <img src="../../assets/img/icons8-cancel-26.png" style="height:21px;width:21px;" (click)="rejectPendingRequest(item.relationId)" >
+                        <img src="../../assets/img/icons8-approval-24.png"style="height:24px;width:24px;"(click)="acceptPendingRequest(item.relationId)" >
+                    </div>
+                </div>
+            </div>
         </div>
         <div id="side">
             <div id="personal-profile">
@@ -53,7 +70,7 @@
             <div id="nav-contacts">
                 <div *ngIf="currentTab =='contact'" id="contacts">
 
-                    <div id="contact" *ngFor="let item of this.normals;" (click)='getMockMessages()'>
+                    <div id="contact" *ngFor="let item of this.friends;" (click)="selectContact(item)">
                         <div id="contact-picture">
                             <div id="contact-image">
                                 <img src="../../assets/img/duck.jpg">
@@ -62,18 +79,18 @@
                         <div id="contact-info">
                             <div id="top-info">
                                 <div id="contact-name">
-                                    <span>{{item.name}}</span>
+                                    <span>{{item.displayName}}</span>
                                 </div>
                                 <div id="contact-date">
-                                    <span>date</span>
+                                    <span></span>
                                 </div>
                             </div>
                             <div id="bot-info">
                                 <div id="contact-last-messanger">
-                                    <span>{{item.lastMessagedName}}:</span>
+                                    <span>{{item.lastMessageName}} :</span>
                                 </div>
                                 <div id="contact-last-message">
-                                    <span>{{item.lastMessagedMessage}}</span>
+                                    <span> {{item.lastMessage}}</span>
                                 </div>
                             </div>
                         </div>
@@ -81,7 +98,7 @@
 
                 </div>
                 <div *ngIf="currentTab =='group'" id="contacts">
-                    <div id="contact" *ngFor="let item of this.group;">
+                    <div id="contact" *ngFor="let item of this.group;" >
                         <div id="contact-picture">
                             <div id="contact-image">
                                 <img src="../../assets/img/duck.jpg">
@@ -161,7 +178,7 @@
                                 <span>{{item.displayName}}</span>
                             </div>
                     <div id="pot-contact-request">
-                        <img src="../../assets/img/icons8-approval-24.png">
+                        <img src="../../assets/img/icons8-approval-24.png" (click)="sendFriendRequest(item.userID)">
                     </div>
                 </div>
             </div>
@@ -169,18 +186,29 @@
             <div id="group1">
                 <div id="contact-conversation">
 
-                    <div class="messsage" *ngFor="let item of this.messages; "
-                        [ngClass]="item.senderID == '1231' ? 'MyMessage':''">
-                        <span>{{item.message}}</span>
+                    <div class="messsage" *ngFor="let item of this.messages; "> 
+                        <div [ngClass]="item.profileId == myProfile.profile.profileId ? 'MyMessage':''">
+                         <div *ngIf="item.type == 'TEXT'">
+                          
+                            <span>{{item.message}}</span>   
+                          
+                         </div>
+                          <div *ngIf="item.type == 'IMAGE'">
+                            <img [src]="item.message" style="width: 220px;">  
+                          </div> 
+                        </div>
+                        
                     </div>
                     
                 </div>
                 <div id="contact-conversation-bar">
+                    <!-- <div  id="emote-icon">   <img src="../../assets/img/icons-grouping.png" style="width: 35px; height: 35px;"></div> -->
+                    <div id="emote-icon">  <input type="file" #file (change)="imagesPreview(file.files)"  style="width: 35px; height: 35px;"></div>
                     <div id="emote-icon">   <img src="../../assets/img/icons-grouping.png" style="width: 35px; height: 35px;"></div>
-                    <div id="emote-icon">   <img src="../../assets/img/icons-grouping.png" style="width: 35px; height: 35px;"></div>
-                    <div id="text-input"><textarea 
-                        class="expandable-textarea" id="message" [(ngModel)]="message" role="textbox"  contenteditable >Your default value </textarea> </div>
-                    <div id="emote-icon"><button id="conversation-input-button" (click)="sendMessage()">Send</button></div>
+                    <div id="text-input">
+                        <textarea  class="expandable-textarea" #myArea id="message" role="textbox" (ng-model)="areaMessage"  contenteditable >Your default value </textarea> </div>
+                    
+                        <div id="emote-icon"><button id="conversation-input-button"(click)="sendTextMessage(myArea.value)">Send</button></div>
                 </div>
            </div>
             <div id="group2">

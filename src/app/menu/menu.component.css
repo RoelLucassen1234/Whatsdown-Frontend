@@ -388,3 +388,44 @@ margin: auto;
 #pot-contact-request{
     margin: auto 55px auto auto;
 }
+
+#pending-container{
+    width: 260px;
+    height: 400px;
+    margin: 25px auto 0 auto;
+    background-color: chocolate;
+    overflow: auto;
+}
+
+
+#pending-container-span{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: black 1px solid;
+}
+
+#pending-request{
+    display: flex;
+    border-bottom: black 1px solid;
+}
+
+#pending-contact-image img{
+    width: 50px;
+    border-radius: 25px;
+    height: 50px;
+}
+
+#pending-contact-name{
+    margin: auto 0px auto 5px;
+}
+#pending-contact-request{
+    margin: auto 0px auto auto;
+}
+#pending-contact-request img{
+   padding-left: 10px;
+   margin-right: 5px;
+   width: 24px;
+   height: 24px;
+}

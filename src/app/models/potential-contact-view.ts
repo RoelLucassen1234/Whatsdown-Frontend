@@ -1,6 +1,6 @@
 export class PotentialContactView {
     public  displayName : string
-    public  UserID : string
+    public  userID : string
     public  Image : string
 }
 

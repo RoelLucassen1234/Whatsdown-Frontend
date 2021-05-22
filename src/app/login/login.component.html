@@ -6,14 +6,14 @@
 </head>
 <div class="container"> 
     <div id="login">
-      <form name='form-login'>
+      <form name='form-login' [formGroup]="loginForm" (ngSubmit) = "moveOn()">
         <span class="fontawesome-user"></span>
-          <input type="text" id="user" placeholder="Username">
+          <input type="text" formControlName="email" id="user" placeholder="Email">
        
         <span class="fontawesome-lock"></span>
-          <input type="password" id="pass" placeholder="Password">
+          <input type="password" formControlName="password" id="pass" placeholder="Password">
         
-        <input type="submit" value="Login" routerLink="/menu">
+        <input type="submit" value="Login">
         <p style="margin-top: 5px; margin-bottom: 0px;"> <a routerLink="/register"> Click here to register</a> </p>
      
         </form>
