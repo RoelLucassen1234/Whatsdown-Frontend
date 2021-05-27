@@ -156,7 +156,8 @@ getPotentialFriendRequestS(){
   {
    
     this.pendingRequests = requests.pendingRequests;
-    console.log(this.pendingRequests)
+    
+   
   });
 }
 
@@ -249,7 +250,7 @@ addToInbox(obj: MessageReturnView) {
 sendLocationMessage(){
   this.locationService.getIPAddress().subscribe((data : any) =>
     {
-      
+      var test = JSON.stringify(data);
       this.locationService.getLocation(data).subscribe(data =>{
         var message = "Hello, my location i am currently in:" + data.test.country_name + " in the city " + data.test.city;
         this.sendTextMessage(message);

@@ -1,6 +1,7 @@
 import { AfterViewChecked, AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
 
 declare const gapi : any;
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit , AfterViewInit {
   loginForm: FormGroup;
   submitted = false;
 
-  constructor(private fb: FormBuilder, private userService: UserService, private router: Router) {
+  constructor(private fb: FormBuilder, private userService: UserService, private authService: AuthService, private router: Router) {
     this.loginForm = this.fb.group({
       email: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(200)]]
@@ -49,6 +50,11 @@ export class LoginComponent implements OnInit , AfterViewInit {
   
   googleSignin(googleUser : any){
     console.log(googleUser)
+    this.authService.loginViaGoogle(googleUser.getAuthResponse().id_token).subscribe(loggedIn => {
+      this.router.navigate(['home'])
+    }, error => {
+      console.error(error);
+    })
   }
 
 }
