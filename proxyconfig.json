@@ -1,0 +1,7 @@
+{
+    "/test": {
+    "target": "http://api.ipify.org/?format=json",
+    "secure": false,
+    "changeOrigin" : true
+    }
+}

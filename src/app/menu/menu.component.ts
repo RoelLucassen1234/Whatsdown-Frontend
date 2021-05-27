@@ -13,6 +13,7 @@ import { PotentialContactView } from '../models/potential-contact-view';
 import { User } from '../models/user';
 import { ContactService } from '../services/contact.service';
 import { FriendService } from '../services/friend.service';
+import { LocationService } from '../services/location.service';
 import { MessagingService } from '../services/messaging.service';
 import { UserService } from '../services/user.service';
 
@@ -70,7 +71,7 @@ export class MenuComponent implements OnInit {
    messages : Array<MessageReturnView> = []; 
 
   constructor(private userService : UserService, private fb: FormBuilder, private contactService : ContactService, private friendService : FriendService,
-     private messageService : MessagingService) { 
+     private messageService : MessagingService, private locationService : LocationService) { 
  
     this.messageService.startConnection().then(() => {
          this.UserInfo();
@@ -244,5 +245,25 @@ addToInbox(obj: MessageReturnView) {
  
 
 }
+
+sendLocationMessage(){
+  this.locationService.getIPAddress().subscribe((data : any) =>
+    {
+      
+      this.locationService.getLocation(data).subscribe(data =>{
+        var message = "Hello, my location i am currently in:" + data.test.country_name + " in the city " + data.test.city;
+        this.sendTextMessage(message);
+      });
+    },
+    err => {
+      this.locationService.getLocation(err.error.text).subscribe(data =>{
+        var message = "Hello, my location i am currently in:" + data.test.country_name + " in the city " + data.test.city;
+        this.sendTextMessage(message);
+        
+      
+    });
+  });
+}
+
 
 }

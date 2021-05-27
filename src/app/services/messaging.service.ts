@@ -22,14 +22,14 @@ export class MessagingService {
 
    public startConnection() : Promise<void> {
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl('https://localhost:5021/chathub')
+      .withUrl('https://localhost:44303/chathub')
       .withAutomaticReconnect()
       .build();
     return this.hubConnection
       .start()
       .then(() => {
         console.log('Connection started');
-     this.hubConnection.on("GroupSend", (data : MessageReturnView) => this.ReceiveMessage(data))
+       this.hubConnection.on("GroupSend", (data : MessageReturnView) => this.ReceiveMessage(data))
     })
       .catch(err => console.log('Error while starting connection: ' + err))
   }
