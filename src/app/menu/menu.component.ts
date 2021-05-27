@@ -266,5 +266,14 @@ sendLocationMessage(){
   });
 }
 
+autogrow(){
+  let textArea = <any>document.getElementById("message");
+  textArea.style.height = '0px';
+  if(textArea.scrollHeight > 160)
+    textArea.style.height = '160px';
+  else
+    textArea.style.height = textArea.scrollHeight + 'px';
+}
+
 
 }

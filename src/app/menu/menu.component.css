@@ -3,7 +3,7 @@
 }
 
 #container {
-    margin: 50px auto;
+    margin: 30px auto 0 auto;
     height: 800px;
     width: 1300px;
     background-color: red;
@@ -14,124 +14,116 @@
     width: 25%;
     padding: 0;
     height: 100%;
-    background-color: #000000;
+    background-color: #121212;
+    display: flex;
+    flex-direction: column;
 }
 
-
-#personal-profile{
+#personal-profile {
     height: 100px;
     color: darkgrey;
     width: 100%;
-    padding-bottom: 10px;
+    padding: 10px 0;
     margin-bottom: 10px;
     background-color: #212121;
 }
 
-#search-filter{
-    display: grid;
+#search-filter {
+    display: flex;
+    justify-content: space-around;
     height: 50px;
     width: 100%;
     margin-bottom: 10px;
     background-color: #212121;
 }
-#icons{
-    grid-row: 1;
-    width: 45px;
-    margin: auto;
+.search-icon-container {
+    cursor: pointer;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-#nav-contacts{
-    height: 619px;
+.icons {
+    height: 30px;
+    width: 30px;
+
+    filter: brightness(0) invert(1);
+}
+#nav-contacts {
+    flex-grow: 1;
     width: 100%;
-    background-color: #000000;
+    background-color: #121212;
     color: darkgrey;
 }
 
-#main{
-    overflow: auto;
+#main {
     width: 75%;
     height: 100%;
-    background-color: #000000;
+    background-color: #121212;
     display: flex;
-    flex-wrap: wrap;
 }
 
-#group1{
- width: auto;
- 
+#group1 {
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0;
+    flex-grow: 1;
+    align-items: center;
 }
-#group2{
+#group2 {
     margin-left: auto;
 }
 
-
-#contact-bar{
-display: flex;    
-width: 500px ;
-height: 60px;
-   background-color: #212121;
-margin: 20px auto 0px 65px;
-padding: 0;
-
-
-
+#contact-bar {
+    display: flex;
+    width: 500px;
+    height: 60px;
+    background-color: #212121;
+    margin: 20px auto 0px 65px;
+    padding: 0;
 }
 
-#contact-conversation{
-    margin:15px 5px 0px 17px;
+#contact-conversation {
     width: 600px;
-    height: 619px;
+    flex-grow: 1;
     display: flex;
     align-items: flex-start;
     flex-direction: column;
     background-color: #212121;
-    overflow: auto;  
+    overflow: auto;
+    border-radius: 3px 3px 0 0;
 }
 
-#contact-conversation-bar{
-   background-color: #303030;
-    height: 80px;
-    width: 600px;
-    margin-left: 17px;
+#contact-conversation-bar {
+    background-color: #303030;
+    width: 560px;
     display: flex;
     overflow: auto;
+    border-radius: 0 0 3px 3px;
+    align-items: center;
+    padding: 20px 20px;
 }
 
-#emote-icon{
-    margin-left: 5px;
-    margin-right: 5px;
+#emote-icon {
+    margin-left: 10px;
+    margin-right: 10px;
     margin-top: auto;
     margin-bottom: auto;
 }
 
-#text-input{
-    margin-left: 5px;
-    margin-right: 5px;
-    margin-top: auto;
-    margin-bottom: auto;
-    width: 400px;
-    max-width: 400px;
-    border-radius: 20px;
-    height: fit-content;
-    max-height: 80px; 
-    overflow: hidden;
-    background-color: #424242
+#text-input {
+    flex-grow: 1;
+    padding: 0 20px;
 }
 .expandable-textarea {
- 
-    font-family: inherit;
-    font-size: inherit;
-    color: darkgrey;
-    padding: 1px 6px;
-    border-radius: 20px;
-    display: block;
-    max-height: 80px; 
-    overflow: auto;
     width: 100%;
-    resize: both;
-    min-height: 40px;
-    line-height: 20px;
-  }
-#text-input input{
+    resize: none;
+    font-family: inherit;
+    border-radius: 3px;
+}
+
+#text-input input {
     color: darkgrey;
     border: solid 1px black;
     width: 400px;
@@ -141,7 +133,7 @@ padding: 0;
     height: fit-content;
 }
 
-#contactprofile{
+#contactprofile {
     background-color: #212121;
     height: 100%;
     width: 340px;
@@ -150,22 +142,22 @@ padding: 0;
     text-align: center;
 }
 #contact-profile-image {
-   background: 303030;
+    background: 303030;
 }
-.contact-profile-image-name{
+.contact-profile-image-name {
     font-size: 20px;
     color: darkgrey;
     font-weight: 600;
     margin-bottom: 0px;
 }
-.contact-profile-image-status{
+.contact-profile-image-status {
     margin-top: 0px;
     font-size: 12px;
     color: darkgrey;
     font-weight: 600;
 }
 
-#contact-profile-actions{
+#contact-profile-actions {
     display: grid;
     align-items: center;
     height: 50px;
@@ -173,7 +165,7 @@ padding: 0;
     justify-content: center;
 }
 
-#contact-profile-buttons button{
+#contact-profile-buttons button {
     width: 91px;
     height: 15px;
 }
@@ -185,26 +177,25 @@ padding: 0;
     height: 65px;
     width: 100%;
     padding-top: 1px;
-    
 }
 
-#contact-picture{
+#contact-picture {
     padding: 0 15px 0 7px;
 }
 
-#contact-image img{
-    width:  60px;
+#contact-image img {
+    width: 60px;
     height: 60px;
 }
-#contact-image img{
+#contact-image img {
     border-radius: 50%;
 }
 
-#contact-info{
+#contact-info {
     width: 100%;
     border-top-color: var(--background-default-active);
-    border-color: #f44336!important;
-    border-bottom: 1px solid rgb(155, 145, 145)!important;
+    border-color: #f44336 !important;
+    border-bottom: 1px solid rgb(155, 145, 145) !important;
 }
 
 #top-info {
@@ -213,33 +204,28 @@ padding: 0;
     padding-top: 5px;
 }
 
-#bot-info{
+#bot-info {
     display: flex;
 }
 
-
-#contact-name{
-width: 75%;
-font-size:larger;
+#contact-name {
+    width: 75%;
+    font-size: larger;
 }
-#contact-date{
-width: 25%;
-margin: auto;
+#contact-date {
+    width: 25%;
+    margin: auto;
 }
 
-#contact-bar{
+#contact-bar {
     display: flex;
 }
 
-
-
-
-#contact-recent-message{
-
+#contact-recent-message {
 }
 
-.messsage{
-    margin : 10px;
+.messsage {
+    margin: 10px;
     padding-left: 5px;
     padding-top: 3px;
     padding-right: 3px;
@@ -251,65 +237,65 @@ margin: auto;
     max-width: 45%;
     border-radius: 5px;
     height: auto;
-  
 }
 
-.MyMessage{
+.MyMessage {
     align-self: flex-end;
     background-color: #262d31;
 }
 
-
-#contact-profile-image img{
-    width:  200px;
+#contact-profile-image img {
+    width: 200px;
     height: 200px;
     border-radius: 50%;
 }
 /* Style the tab */
-#personal-profile-image{
+#personal-profile-image {
     margin: auto;
+    cursor: pointer;
 }
-#personal-profile-image img{
-    width:  80px;
+#personal-profile-image img {
+    width: 80px;
     height: 80px;
     border-radius: 50%;
 }
 
-#personal-profile{
-   display: flex;
-   align-items: center;
+#personal-profile {
+    display: flex;
+    align-items: center;
 }
 
-#personal-profile-status{
+#personal-profile-status {
     width: 100px;
     overflow-wrap: break-word;
     margin: auto;
 }
 
-#personal-profile-more img{
+#personal-profile-more img {
     width: 60px;
     height: 60px;
 }
-#personal-profile-more{
+#personal-profile-more {
     width: 60px;
     height: 60px;
 }
-#profile-options-button{
+#profile-options-button {
     margin: auto;
+    cursor: pointer;
 }
-#profile-options-button img{
+#profile-options-button img {
     width: 20px;
     height: 20px;
 }
-.profilemenu{
+.profilemenu {
     position: absolute;
     height: 800px;
     width: 325px;
-    background-color: chartreuse;
+    background-color: rgb(48, 48, 48);
     z-index: 10;
 }
 
-.search-menu{
+.search-menu {
     position: absolute;
     height: 800px;
     width: 635px;
@@ -320,76 +306,75 @@ margin: auto;
 
 #search-container {
     margin-top: 10px;
-    display:  flex;
+    display: flex;
     height: 28px;
     justify-content: center;
 }
-#search-container input[type=text] {
-  padding: 6px;
-  margin-top: 8px;
-  margin-right: 16px;
-  border: none;
-  font-size: 17px;
+#search-container input[type="text"] {
+    padding: 6px;
+    margin-top: 8px;
+    margin-right: 16px;
+    border: none;
+    font-size: 17px;
 }
 
 #search-container button {
     float: none;
     text-align: left;
-  
-  }
-.returnProfile{
+}
+.returnProfile {
     display: flex;
     border-bottom: black 1px solid;
 }
-.returnProfile img{
-    height: 50px;
+.returnProfile img {
+    height: 20px;
+    margin: 20px;
 }
-#returnSpan{
+#returnSpan {
     margin-top: auto;
     margin-bottom: auto;
     margin-left: 20px;
     font-size: x-large;
 }
 
-#personal-contact-profile-image{
+#personal-contact-profile-image {
     display: grid;
     justify-content: center;
     place-items: center;
 }
 
-#personal-contact-profile-image span{
+#personal-contact-profile-image span {
     font-size: larger;
     font-weight: 600;
     font-family: system-ui;
 }
-#personal-contact-profile-image img{
+#personal-contact-profile-image img {
     width: 200px;
     height: 200px;
     border-radius: 50%;
 }
 
-#pot-contact{
+#pot-contact {
     display: flex;
     height: 65px;
     width: 100%;
     padding-top: 1px;
     border-bottom: black 1px solid;
-
 }
-#pot-contacts{
+#pot-contacts {
     overflow: auto;
 }
-#pot-contact-name{
+#pot-contact-name {
     margin-top: auto;
     margin-bottom: auto;
     font-size: x-large;
 }
 
-#pot-contact-request{
+#pot-contact-request {
     margin: auto 55px auto auto;
 }
 
-#pending-container{
+#pending-container {
     width: 260px;
     height: 400px;
     margin: 25px auto 0 auto;
@@ -397,8 +382,7 @@ margin: auto;
     overflow: auto;
 }
 
-
-#pending-container-span{
+#pending-container-span {
     display: flex;
     justify-content: center;
     margin-bottom: 10px;
@@ -406,26 +390,29 @@ margin: auto;
     border-bottom: black 1px solid;
 }
 
-#pending-request{
+#pending-request {
     display: flex;
     border-bottom: black 1px solid;
 }
 
-#pending-contact-image img{
+#pending-contact-image img {
     width: 50px;
     border-radius: 25px;
     height: 50px;
 }
 
-#pending-contact-name{
+#pending-contact-name {
     margin: auto 0px auto 5px;
 }
-#pending-contact-request{
+#pending-contact-request {
     margin: auto 0px auto auto;
 }
-#pending-contact-request img{
-   padding-left: 10px;
-   margin-right: 5px;
-   width: 24px;
-   height: 24px;
+#pending-contact-request img {
+    padding-left: 10px;
+    margin-right: 5px;
+    width: 24px;
+    height: 24px;
+}
+#file-input{
+    display: none;
 }
