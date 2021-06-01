@@ -9,3 +9,4 @@ RUN npm run build
 FROM nginx:alpine
 COPY --from=build /app/dist/Whatsdown-Messaging-Application /usr/share/nginx/html
 EXPOSE 4200
+EXPOSE 80
