@@ -3,7 +3,6 @@ import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, from, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { PotentialContactView } from '../models/potential-contact-view';
 import { LoginView } from '../models/login-view.model';
 import { RegisterView } from '../models/register-view.model';
 import { JWT } from '../models/jwt';
