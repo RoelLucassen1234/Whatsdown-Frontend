@@ -5,16 +5,22 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { profile } from 'console';
 import { FriendDTO } from '../Dto/friend-dto';
 import { MessageDTO } from '../Dto/message-dto';
+import { BasicFriendView } from '../models/basic-friend-view';
 import { FriendViewModel } from '../models/friend-view-model';
+import { JWT } from '../models/jwt';
 import { MessageReturnView } from '../models/message';
 import { MessageView } from '../models/message-view';
+import { PartlyPendingRequests } from '../models/partly-pending-requests';
 import { PendingRequest } from '../models/pending-request';
 import { PotentialContactView } from '../models/potential-contact-view';
+import { RecentMessageView } from '../models/recent-message-view';
 import { User } from '../models/user';
+import { AuthService } from '../services/auth.service';
 import { ContactService } from '../services/contact.service';
 import { FriendService } from '../services/friend.service';
 import { LocationService } from '../services/location.service';
 import { MessagingService } from '../services/messaging.service';
+import { ProfileService } from '../services/profile.service';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -51,8 +57,9 @@ export class MenuComponent implements OnInit {
    friendMenuIsActive = true;
    currentTab = "contact";
    currentGroupCode = '';
-
+   profileIds : string[] = [];
    myProfile: User;
+   jwt : JWT;
    message !: string;
    searchdata: FormGroup;
    areaMessage : any = '';
@@ -71,10 +78,11 @@ export class MenuComponent implements OnInit {
    messages : Array<MessageReturnView> = []; 
 
   constructor(private userService : UserService, private fb: FormBuilder, private contactService : ContactService, private friendService : FriendService,
-     private messageService : MessagingService, private locationService : LocationService) { 
- 
+     private messageService : MessagingService, private locationService : LocationService, private authService :AuthService, private profileService : ProfileService) { 
+      
+    this.jwt = this.authService.userValue;
     this.messageService.startConnection().then(() => {
-         this.UserInfo();
+         this.getFriends();
          this.messageService.retrieveMappedObject().subscribe((receivedObj: MessageReturnView) => {this.addToInbox(receivedObj)});  // calls the service method to get the new messages sent
         })
 
@@ -99,11 +107,65 @@ export class MenuComponent implements OnInit {
   switchTab(tabName : string) {
     this.currentTab = tabName;
   }
-  getFriends(){
-    this.friendService.getFriends(this.myProfile.profile.profileId).subscribe((data : any) =>
+
+  
+
+  async getFriends(){
+    
+   await this.friendService.getFriends(this.authService.userValue.id).subscribe(async (data : any) =>
       {
-        console.log(data);
-        this.friends = data.friends;
+        let test : FriendViewModel[] = [];
+        let basicFriends : BasicFriendView[] = [];
+        basicFriends = data.friend;
+
+          basicFriends.forEach( element => {
+          console.log(element.relationCode);
+          var model = new FriendViewModel();
+          model.identificationCode = element.relationCode;
+          model.profileId = element.profileId;
+          this.profileIds.push(element.relationCode);
+    
+          test.push(model);
+        });
+      
+        console.log("IDs " + this.profileIds);
+        console.log(test);
+        /////////////////////
+
+       await test.forEach(element => {
+          this.profileService.GetProfile(element.profileId).subscribe((profile : any) =>{
+            element.profile = profile.profile;
+          })
+        });
+        console.log(this.profileIds)
+        await this.messageService.GetRecentMessagesFromList(this.profileIds).subscribe((recentData : any) => {
+          
+          var messages : RecentMessageView[] = [];
+          messages = recentData.messages;
+          console.log(messages);
+          messages.forEach(element => {
+           test.forEach(friend => {
+       
+              if (element.identificationCode == friend.identificationCode){
+                friend.lastMessage = element.mostRecentMessage;
+                friend.lastMessageDate = element.date;
+             
+                if (friend.profile.profileId == element.senderId){
+                  friend.lastMessageName = friend.profile.displayName;
+                }else{
+                 friend.lastMessageName = "You";
+                }
+                console.log(friend);
+              
+              }
+            });
+            
+          });
+
+          this.friends = test;
+       
+         })
+        
         var group :  Array<string> = []
         this.friends.forEach(element => {
           group.push(element.identificationCode)
@@ -112,29 +174,26 @@ export class MenuComponent implements OnInit {
         this.messageService.JoinGroup(group);
         
       });
+
+  
   }
 
 
-UserInfo(){
-   this.userService.getUser().subscribe(
-    (user : any) => {
-      this.myProfile =  user.user;
-      this.getFriends();
-    })
-  };
+
 
   onClickSearchContacts(){
-    this.contactService.getPotentialContacts(this.searchdata.controls['contactsearch'].value, this.myProfile.userId).subscribe((contacts : any) => 
-      {
-        console.log(contacts);
-        this.potentialContacts = contacts.profiles;
-      })
+    this.profileService.GetPotentialProfiles(this.searchdata.controls['contactsearch'].value, this.authService.userValue.id).subscribe((contacts : any) => 
+    {
+      console.log(contacts);
+      this.potentialContacts = contacts.profiles;
       console.log(this.potentialContacts);
+    });
+   
   }
 
 toggle(){
   this.menuIsActive = !this.menuIsActive;
-  console.log(this.myProfile)
+  
   this.getPotentialFriendRequestS()
 }
 
@@ -145,17 +204,28 @@ toggleSearchMenu(){
 
 sendFriendRequest(friendProfileID : string){
   console.log(friendProfileID);
-  this.friendService.sendFriendRequest(this.myProfile.profile.profileId, friendProfileID).subscribe(test =>
+  this.friendService.sendFriendRequest(this.authService.userValue.id, friendProfileID).subscribe(test =>
     {
       console.log(test);
     });
 }
 
 getPotentialFriendRequestS(){
-  this.friendService.getPendingRequests(this.myProfile.profile.profileId).subscribe((requests : any) => 
+  this.friendService.getPendingRequests(this.authService.userValue.id).subscribe((requests : any) => 
   {
-   
-    this.pendingRequests = requests.pendingRequests;
+    console.log(requests);
+    let PartlyPendingRequests : Array<PartlyPendingRequests> = []; 
+    PartlyPendingRequests = requests.pendingRequests;
+
+    PartlyPendingRequests.forEach(element => {
+      this.profileService.GetProfile(element.ProfileId).subscribe((data : any )=> {
+        this.pendingRequests.push(new PendingRequest(data.profile.displayName, data.profile.displayName, element.ProfileId))
+      })
+    });
+    
+
+
+    
     
    
   });
@@ -163,14 +233,17 @@ getPotentialFriendRequestS(){
 
 acceptPendingRequest(relationId : string){
   console.log(relationId);
-  this.friendService.acceptFriendRequest(relationId, this.myProfile.profile.profileId)
-  this.pendingRequests = this.pendingRequests.filter(function( obj ) {
-    return obj.relationId !== relationId;
-});
+  this.friendService.acceptFriendRequest(relationId, this.authService.userValue.id).subscribe(data => {
+    console.log("Accepting request");
+    this.pendingRequests = this.pendingRequests.filter(function( obj ) {
+      return obj.relationId !== relationId;
+  });
+  })
+ 
 }
 
 rejectPendingRequest(relationId : string){
-  this.friendService.declineFriendRequest(relationId, this.myProfile.profile.profileId)
+  this.friendService.declineFriendRequest(relationId, this.authService.userValue.id)
   this.pendingRequests = this.pendingRequests.filter(function( obj ) {
     return obj.relationId !== relationId;
 });
@@ -180,6 +253,7 @@ selectContact(profile : FriendViewModel){
 this.currentGroupCode = profile.identificationCode;
 if (profile.messages == null){
   this.messageService.getAllMessages(profile.identificationCode).subscribe(data => {
+    console.log(data.messages);
     profile.messages = data.messages;
     this.messages = profile.messages;
   });
@@ -194,7 +268,7 @@ sendTextMessage(text : string){
   let test = new MessageView();
   test.identificationCode = this.currentGroupCode;
   test.message = text;
-  test.senderId = this.myProfile.profile.profileId;
+  test.senderId = this.authService.userValue.id;
   test.type = "TEXT";
   this.messageService.SendTextMessage(test);
 }
@@ -214,7 +288,7 @@ imagesPreview = (files : any) => {
     if(reader.result != null){
       console.log("Start sending images");
       const formData = new FormData();
-      formData.append('SenderId', this.myProfile.profile.profileId);
+      formData.append('SenderId', this.authService.userValue.id);
       formData.append('IdentificationCode', this.currentGroupCode);
       formData.append('Message', reader.result.toString());
       formData.append('Type', "IMAGE");

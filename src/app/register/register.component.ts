@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { error } from 'protractor';
+import { LoginView } from '../models/login-view.model';
+import { RegisterView } from '../models/register-view.model';
+import { AuthService } from '../services/auth.service';
+import { ProfileService } from '../services/profile.service';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +19,7 @@ export class RegisterComponent implements OnInit {
   public isSubmitted = false;
 
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private authService : AuthService, private profileService : ProfileService, private router: Router) {
     this.registerData = this.fb.group({
       name : ['', [Validators.required, Validators.minLength(5), Validators.maxLength(25)]],
       gender : ['Male', Validators.required],
@@ -51,6 +57,24 @@ export class RegisterComponent implements OnInit {
     console.log(confirmPassword);
     console.log(gender);
     console.log(email);
+    var view = new RegisterView();
+    view.Email = email;
+    view.DisplayName = name;
+    view.Password = password;
+    view.Gender = gender;
+    view.ConfirmPassword = confirmPassword;
+    
+    this.authService.register(view).subscribe(data => {
+      this.profileService.PostProfile(view.DisplayName, view.Gender,data.response).subscribe(data => {
+        this.router.navigateByUrl('/login');
+      }, error => {
+        console.log(error);
+      });
+      
+     
+    }, error => {
+      console.error(error);
+    });
 
   }
 

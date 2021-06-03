@@ -20,11 +20,11 @@
             </div>
             <div id="personal-contact-profile-name">
                 <span>Your name</span>
-                <input type="text" id="fname" value="{{this.myProfile.profile.displayName}}" name="fname">
+                <input type="text" id="fname" value="Not implemented" name="fname">
             </div>
             <div id="personal-contact-profile-name">
                 <span>Your status</span>
-                <input type="text" id="fname" value="{{this.myProfile.profile.status}}" name="fname">
+                <input type="text" id="fname" value="Not implemented" name="fname">
             </div>
             <div id="pending-container">
                 <span id="pending-container-span">Pending Requests</span>
@@ -82,7 +82,7 @@
                         <div id="contact-info">
                             <div id="top-info">
                                 <div id="contact-name">
-                                    <span>{{item.displayName}}</span>
+                                    <span>{{item.profile.displayName}}</span>
                                 </div>
                                 <div id="contact-date">
                                     <span></span>
@@ -190,7 +190,7 @@
                 <div id="contact-conversation">
 
                     <div class="messsage" *ngFor="let item of this.messages; "> 
-                        <div [ngClass]="item.profileId == myProfile.profile.profileId ? 'MyMessage':''">
+                        <div [ngClass]="item.profileId == jwt.id ? 'MyMessage':''">
                          <div *ngIf="item.type == 'TEXT'">
                           
                             <span>{{item.message}}</span>   

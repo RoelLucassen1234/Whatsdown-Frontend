@@ -22,7 +22,7 @@ export class MessagingService {
 
    public startConnection() : Promise<void> {
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl('https://localhost:44303/chathub')
+      .withUrl('https://localhost:5021/chathub')
       .withAutomaticReconnect()
       .build();
     return this.hubConnection
@@ -46,6 +46,18 @@ export class MessagingService {
   public SendImageMessage(data : any){
     return this.http.post<any>(`${environment.apiUrl}/api/chat/post/image`, data).subscribe()
   }
+
+  public GetRecentMessagesFromList(data : string[]){
+    console.log("Recent messages:")
+    console.log(data);
+    let params = "?";
+    data.forEach(element => {
+      params += "identificationCode=" + element;
+    });
+    return this.http.post<any>(`${environment.apiUrl}/chat/friends/recent`,data)
+  }
+
+
   public retrieveMappedObject(): Observable<MessageReturnView> {
     return this.sharedObj.asObservable();
   }

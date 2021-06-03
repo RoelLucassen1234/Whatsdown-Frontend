@@ -32,7 +32,7 @@ export class FriendService {
 
    acceptFriendRequest(relationshipId : string, profileId : string){
     var model :  RequestAnswerView = new RequestAnswerView(relationshipId,profileId);
-    return this.http.put<any>(`${environment.apiUrl}/api/friends/accept`, model).subscribe();
+    return this.http.put<any>(`${environment.apiUrl}/api/friends/accept`, model);
    }
    declineFriendRequest(relationshipId : string, profileId : string){
     var model :  RequestAnswerView = new RequestAnswerView(relationshipId,profileId);

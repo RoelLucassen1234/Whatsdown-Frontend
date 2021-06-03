@@ -1,6 +1,7 @@
 import { AfterViewChecked, AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { error } from 'protractor';
 import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
 
@@ -42,16 +43,20 @@ export class LoginComponent implements OnInit , AfterViewInit {
     if (this.loginForm.invalid) {
       return;
     }
-    this.userService.changeMessage(this.loginForm.get("email")?.value)
-    console.log(this.userService.getMessage().value);
-    this.router.navigateByUrl('/menu');
+    this.authService.loginViaNormal(this.loginForm.get("email")?.value,this.loginForm.get("password")?.value ).subscribe(data => {
+       this.router.navigate(['menu'])
+       
+    }, error => {
+      console.log(error);
+    })
+
   }
   get f() { return this.loginForm.controls; }
   
   googleSignin(googleUser : any){
     console.log(googleUser)
     this.authService.loginViaGoogle(googleUser.getAuthResponse().id_token).subscribe(loggedIn => {
-      this.router.navigate(['home'])
+      this.router.navigate(['menu'])
     }, error => {
       console.error(error);
     })
