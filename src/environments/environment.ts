@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://api.whatsdown.nl:6011'
+  apiUrl: 'http://api.whatsdown.nl'
 };
 
 /*
