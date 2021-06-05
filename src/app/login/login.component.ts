@@ -2,6 +2,7 @@ import { AfterViewChecked, AfterViewInit, Component, isDevMode, OnInit } from '@
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { error } from 'protractor';
+import { environment } from 'src/environments/environment';
 import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
 
@@ -37,6 +38,7 @@ export class LoginComponent implements OnInit , AfterViewInit {
   
   ngOnInit(): void {
     if (isDevMode()) {
+      console.log(environment.apiUrl)
       console.log('👋 Development!');
     } else {
       console.log('💪 Production!');
