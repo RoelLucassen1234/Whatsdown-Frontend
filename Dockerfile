@@ -3,6 +3,7 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 COPY . .
 RUN npm install
+RUN npm install -g @angular/cli
 RUN npm run build --prod
 
 
