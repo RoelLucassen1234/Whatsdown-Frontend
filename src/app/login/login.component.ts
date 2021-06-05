@@ -1,4 +1,4 @@
-import { AfterViewChecked, AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, isDevMode, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { error } from 'protractor';
@@ -36,6 +36,11 @@ export class LoginComponent implements OnInit , AfterViewInit {
 
   
   ngOnInit(): void {
+    if (isDevMode()) {
+      console.log('👋 Development!');
+    } else {
+      console.log('💪 Production!');
+    }
   }
 
   moveOn() {
