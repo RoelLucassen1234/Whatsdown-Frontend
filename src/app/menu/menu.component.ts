@@ -219,8 +219,11 @@ getPotentialFriendRequestS(){
     
     PartlyPendingRequests = requests.pendingRequests.pendingRequests;
     console.log(PartlyPendingRequests);
+    console.log(requests.pendingRequests.pendingRequests);
    
     PartlyPendingRequests.forEach(element => {
+      console.log(element);
+      console.log(PartlyPendingRequests);
       this.profileService.GetProfile(element.ProfileId).subscribe((data : any )=> {
         this.pendingRequests.push(new PendingRequest(data.profile.displayName, data.profile.displayName, element.ProfileId))
       })
