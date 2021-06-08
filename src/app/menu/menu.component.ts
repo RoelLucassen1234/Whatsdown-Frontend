@@ -213,9 +213,12 @@ sendFriendRequest(friendProfileID : string){
 getPotentialFriendRequestS(){
   this.friendService.getPendingRequests(this.authService.userValue.id).subscribe((requests : any) => 
   {
+    console.log("AAAAARGH");
     console.log(requests);
     let PartlyPendingRequests : Array<PartlyPendingRequests> = []; 
+    
     PartlyPendingRequests = requests.pendingRequests;
+    console.log(PartlyPendingRequests);
 
     PartlyPendingRequests.forEach(element => {
       this.profileService.GetProfile(element.ProfileId).subscribe((data : any )=> {
