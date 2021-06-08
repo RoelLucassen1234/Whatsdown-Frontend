@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit , AfterViewInit {
 
   loginForm: FormGroup;
   submitted = false;
-
+  error = "";
   constructor(private fb: FormBuilder, private userService: UserService, private authService: AuthService, private router: Router) {
     this.loginForm = this.fb.group({
       email: ['', Validators.required],
@@ -54,6 +54,7 @@ export class LoginComponent implements OnInit , AfterViewInit {
        this.router.navigate(['menu'])
        
     }, error => {
+      this.error = error.error;
       console.log(error);
     })
 
@@ -65,6 +66,7 @@ export class LoginComponent implements OnInit , AfterViewInit {
     this.authService.loginViaGoogle(googleUser.getAuthResponse().id_token).subscribe(loggedIn => {
       this.router.navigate(['menu'])
     }, error => {
+      this.error = error.error;
       console.error(error);
     })
   }

@@ -17,7 +17,7 @@ export class RegisterComponent implements OnInit {
   registerData: FormGroup;
   notSame = true;
   public isSubmitted = false;
-
+  error = "";
 
   constructor(private fb: FormBuilder, private authService : AuthService, private profileService : ProfileService, private router: Router) {
     this.registerData = this.fb.group({
@@ -68,12 +68,14 @@ export class RegisterComponent implements OnInit {
       this.profileService.PostProfile(view.DisplayName, view.Gender,data.response).subscribe(data => {
         this.router.navigateByUrl('/login');
       }, error => {
-        console.log(error);
+        this.error = error.error;
+        console.log( this.error);
       });
       
      
     }, error => {
-      console.error(error);
+      this.error = error.error;
+   
     });
 
   }

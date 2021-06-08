@@ -22,7 +22,7 @@ export class MessagingService {
 
    public startConnection() : Promise<void> {
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl("http://api.whatsdown.nl/chathub")
+      .withUrl(`${environment.apiUrl}/chathub`)
       .withAutomaticReconnect()
       .build();
     return this.hubConnection
@@ -50,14 +50,14 @@ export class MessagingService {
   public GetRecentMessagesFromList(data : string[]){
     console.log("Recent messages:")
     console.log(data);
+    ;
     let params = "?";
     data.forEach(element => {
       params += "identificationCode=" + element;
     });
-    if (data.length != 0)
-    return this.http.post<any>(`${environment.apiUrl}/chat/friends/recent`,data);
+   return this.http.post<any>(`${environment.apiUrl}/chat/friends/recent`,data);
 
-    return null;
+   
   }
 
 

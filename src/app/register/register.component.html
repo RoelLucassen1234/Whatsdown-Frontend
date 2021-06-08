@@ -2,7 +2,10 @@
   <div id="register">
     <form [formGroup]="registerData" name='form-register' (submit)="register()">
       <h2 style="margin-top: 0px;">Create your account</h2>
-
+      <div *ngIf="this.error"></div>
+        <div class="alert alert-danger">
+          <small>{{this.error}}</small>
+        </div>
 
       <div>
         <div *ngIf="isSubmitted && registerData.controls.name.invalid">

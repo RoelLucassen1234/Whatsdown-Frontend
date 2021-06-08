@@ -7,7 +7,10 @@
 <div class="container"> 
     <div id="login">
       <form name='form-login' [formGroup]="loginForm" (ngSubmit) = "moveOn()">
-       
+        <div *ngIf="this.error"></div>
+        <div class="alert alert-danger">
+          <small>{{this.error}}</small>
+        </div>
         <div>
           <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
             <div class="alert alert-danger" *ngIf="f.email.errors?.required"><small>This field is required</small></div>
