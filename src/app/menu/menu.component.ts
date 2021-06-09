@@ -222,11 +222,11 @@ getPotentialFriendRequestS(){
     console.log(requests.pendingRequests);
    
     PartlyPendingRequests.forEach(element => {
-      var teststring = element.ProfileId;
+      var teststring = element.profileId;
       console.log("This is the profilestring: " + teststring)
       
       this.profileService.GetProfile(teststring.toString()).subscribe((data : any )=> {
-        this.pendingRequests.push(new PendingRequest(data.profile.displayName, data.profile.displayName, element.ProfileId))
+        this.pendingRequests.push(new PendingRequest(data.profile.displayName, data.profile.displayName, element.profileId))
       })
     });
     

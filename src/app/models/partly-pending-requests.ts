@@ -1,3 +1,3 @@
 export class PartlyPendingRequests {
-     ProfileId : string;
+     profileId : string;
 }
