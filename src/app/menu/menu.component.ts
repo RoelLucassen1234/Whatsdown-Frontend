@@ -216,10 +216,10 @@ getPotentialFriendRequestS(){
   {
 
     let PartlyPendingRequests : Array<PartlyPendingRequests> = []; 
-    
+    console.log("AAAAAAAAAAAAAAAAARGH");
     PartlyPendingRequests = requests.pendingRequests.pendingRequests;
     console.log(PartlyPendingRequests);
-    console.log(requests.pendingRequests.pendingRequests);
+    console.log(requests.pendingRequests);
    
     PartlyPendingRequests.forEach(element => {
       console.log(element);
