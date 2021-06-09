@@ -226,7 +226,7 @@ getPotentialFriendRequestS(){
       console.log("This is the profilestring: " + teststring)
       
       this.profileService.GetProfile(teststring.toString()).subscribe((data : any )=> {
-        this.pendingRequests.push(new PendingRequest(data.profile.displayName, data.profile.displayName, element.profileId))
+        this.pendingRequests.push(new PendingRequest(data.profile.displayName, data.profile.displayName, element.relationId))
       })
     });
     
