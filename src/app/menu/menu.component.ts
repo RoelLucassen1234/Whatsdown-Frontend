@@ -83,6 +83,7 @@ export class MenuComponent implements OnInit {
     this.jwt = this.authService.userValue;
     this.messageService.startConnection().then(() => {
          this.getFriends();
+         console.log(this.friends);
          this.messageService.retrieveMappedObject().subscribe((receivedObj: MessageReturnView) => {this.addToInbox(receivedObj)});  // calls the service method to get the new messages sent
         })
 
@@ -128,8 +129,6 @@ export class MenuComponent implements OnInit {
           test.push(model);
         });
       
-        console.log("IDs " + this.profileIds);
-        console.log(test);
         /////////////////////
 
        await test.forEach(element => {
@@ -138,7 +137,7 @@ export class MenuComponent implements OnInit {
           })
         });
         console.log(this.profileIds)
-        await this.messageService.GetRecentMessagesFromList(this.profileIds).subscribe((recentData : any) => {
+        this.messageService.GetRecentMessagesFromList(this.profileIds).subscribe((recentData : any) => {
           
           var messages : RecentMessageView[] = [];
           messages = recentData.messages;
@@ -154,15 +153,14 @@ export class MenuComponent implements OnInit {
                   friend.lastMessageName = friend.profile.displayName;
                 }else{
                  friend.lastMessageName = "You";
-                }
-                console.log(friend);
-              
+                }   
               }
             });
             
           });
 
           this.friends = test;
+          console.log("Friends: " + test)
        
          })
         
@@ -170,9 +168,7 @@ export class MenuComponent implements OnInit {
         this.friends.forEach(element => {
           group.push(element.identificationCode)
         });
-
-        this.messageService.JoinGroup(group);
-        
+        this.messageService.JoinGroup(group);     
       });
 
   
@@ -216,15 +212,12 @@ getPotentialFriendRequestS(){
   {
 
     let PartlyPendingRequests : Array<PartlyPendingRequests> = []; 
-
     PartlyPendingRequests = requests.pendingRequests;
-    console.log(PartlyPendingRequests);
-    console.log(requests.pendingRequests);
+
    
     PartlyPendingRequests.forEach(element => {
       var teststring = element.profileId;
-      console.log("This is the profilestring: " + teststring)
-      
+
       this.profileService.GetProfile(teststring.toString()).subscribe((data : any )=> {
         this.pendingRequests.push(new PendingRequest(data.profile.displayName, data.profile.displayName, element.relationId))
       })
