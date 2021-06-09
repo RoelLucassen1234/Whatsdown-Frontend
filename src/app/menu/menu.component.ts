@@ -83,7 +83,6 @@ export class MenuComponent implements OnInit {
     this.jwt = this.authService.userValue;
     this.messageService.startConnection().then(() => {
          this.getFriends();
-         console.log(this.friends);
          this.messageService.retrieveMappedObject().subscribe((receivedObj: MessageReturnView) => {this.addToInbox(receivedObj)});  // calls the service method to get the new messages sent
         })
 
@@ -141,7 +140,7 @@ export class MenuComponent implements OnInit {
           
           var messages : RecentMessageView[] = [];
           messages = recentData.messages;
-          console.log(messages);
+        
           messages.forEach(element => {
            test.forEach(friend => {
        
@@ -160,15 +159,17 @@ export class MenuComponent implements OnInit {
           });
 
           this.friends = test;
-          console.log("Friends: " + test)
+          
+          var group :  Array<string> = []
+          this.friends.forEach(element => {
+            console.log("identificationcode: " + element.identificationCode)
+            group.push(element.identificationCode)
+          });
+          this.messageService.JoinGroup(group); 
        
          })
         
-        var group :  Array<string> = []
-        this.friends.forEach(element => {
-          group.push(element.identificationCode)
-        });
-        this.messageService.JoinGroup(group);     
+          
       });
 
   

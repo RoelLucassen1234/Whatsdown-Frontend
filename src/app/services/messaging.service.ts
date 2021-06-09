@@ -48,8 +48,7 @@ export class MessagingService {
   }
 
   public GetRecentMessagesFromList(data : string[]){
-    console.log("Recent messages:")
-    console.log(data);
+  
     ;
     let params = "?";
     data.forEach(element => {
