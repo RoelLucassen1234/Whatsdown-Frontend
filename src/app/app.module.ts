@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegisterComponent } from './register/register.component';
 import { MenuComponent } from './menu/menu.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 
 @NgModule({
@@ -27,7 +28,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     HttpClientModule,
     [RouterModule]
   ],
-  providers: [],
+  providers: [ {provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
