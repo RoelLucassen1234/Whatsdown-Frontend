@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://api.whatsdown.nl'
+  apiUrl: 'https://localhost:5021'
 };
 
 /*

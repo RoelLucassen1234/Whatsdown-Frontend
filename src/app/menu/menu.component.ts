@@ -323,22 +323,13 @@ addToInbox(obj: MessageReturnView) {
 }
 
 sendLocationMessage(){
-  this.locationService.getIPAddress().subscribe((data : any) =>
-    {
-      var test = JSON.stringify(data);
-      this.locationService.getLocation(data).subscribe(data =>{
-        var message = "Hello, my location i am currently in:" + data.test.country_name + " in the city " + data.test.city;
-        this.sendTextMessage(message);
-      });
-    },
-    err => {
-      this.locationService.getLocation(err.error.text).subscribe(data =>{
-        var message = "Hello, my location i am currently in:" + data.test.country_name + " in the city " + data.test.city;
+ 
+      this.locationService.getLocation("100.0.0.1").subscribe((data : any) =>{
+        var message = data.response;
         this.sendTextMessage(message);
         
       
     });
-  });
 }
 
 autogrow(){
