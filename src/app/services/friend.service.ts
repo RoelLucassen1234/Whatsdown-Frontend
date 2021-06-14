@@ -23,8 +23,8 @@ export class FriendService {
     return this.http.get<FriendRequestViewModel>(`${environment.apiUrl}/api/friends/pending`)
    }
 
-   sendFriendRequest(userId : string, friendId: string){
-    var model :  FriendRequestViewModel = new FriendRequestViewModel(userId,friendId);
+   sendFriendRequest(friendId: string){
+    var model :  FriendRequestViewModel = new FriendRequestViewModel(friendId);
     console.log(model);
     
     return this.http.post<any>(`${environment.apiUrl}/api/friends/request`, model)

@@ -1,4 +1,4 @@
 export class FriendRequestViewModel {
 
-    constructor(public userId : string , public friendId: string){}
+    constructor(public friendId: string){}
 }

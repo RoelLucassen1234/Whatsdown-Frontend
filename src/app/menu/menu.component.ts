@@ -223,8 +223,12 @@ export class MenuComponent implements OnInit {
 
   sendFriendRequest(friendProfileID: string) {
     console.log(friendProfileID);
-    this.friendService.sendFriendRequest(this.authService.userValue.id, friendProfileID).subscribe(test => {
-      console.log(test);
+    this.friendService.sendFriendRequest(friendProfileID).subscribe(test => {
+      
+        this.potentialContacts = this.potentialContacts.filter(function (obj) {
+          return obj.userID !== friendProfileID;
+    
+      });
     });
   }
 
