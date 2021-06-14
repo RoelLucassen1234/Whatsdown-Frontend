@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://backendservice:6011'
+  apiUrl: 'http://api.whatsdown.nl'
 };
