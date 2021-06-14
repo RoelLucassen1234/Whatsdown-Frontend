@@ -52,11 +52,6 @@ export class RegisterComponent implements OnInit {
     let gender = this.registerData.controls['gender'].value;
     let email = this.registerData.controls['email'].value;
 
-    console.log(name);
-    console.log(password);
-    console.log(confirmPassword);
-    console.log(gender);
-    console.log(email);
     var view = new RegisterView();
     view.Email = email;
     view.DisplayName = name;
@@ -68,13 +63,24 @@ export class RegisterComponent implements OnInit {
       this.profileService.PostProfile(view.DisplayName, view.Gender,data.response).subscribe(data => {
         this.router.navigateByUrl('/login');
       }, error => {
-        this.error = error.error;
-        console.log( this.error);
+        console.log(error.status);
+        if (error.statusText == "Unknown Error")
+        this.error ="We are currently experiencing problems. Try again later." 
+        if (error.status == 502)
+        this.error = "We are currently experiencing problems. Try again later."
+        if (error.status == 400)
+        this.error = error.error
       });
       
      
     }, error => {
-      this.error = error.error;
+      console.log(error.status);
+      if (error.statusText == "Unknown Error")
+      this.error ="We are currently experiencing problems. Try again later." 
+      if (error.status == 502)
+      this.error = "We are currently experiencing problems. Try again later."
+      if (error.status == 400)
+      this.error = error.error
    
     });
 

@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, from, Observable } from 'rxjs';
@@ -33,17 +33,24 @@ export class AuthService {
   }
 
   loginViaNormal(email : string, password : string){
+const header = new HttpHeaders({
+  'skipInterceptor' : 'true'
+})
+
     var view = new LoginView();
     view.email = email;
     view.password = password;
-    return this.http.post<any>(`${environment.apiUrl}/auth/normal` ,view).pipe(map((token : any) => {
+    return this.http.post<any>(`${environment.apiUrl}/auth/normal` ,view , {headers : header}).pipe(map((token : any) => {
       this.createJWT(token.jwt);
       return true;
     }));
   }
 
   register(view : RegisterView){
-    return this.http.post<any>(`${environment.apiUrl}/auth/register`,view);
+    const header = new HttpHeaders({
+      'skipInterceptor' : 'true'
+    })
+    return this.http.post<any>(`${environment.apiUrl}/auth/register`,view, {headers : header});
   }
 
   public get userValue(): JWT {
@@ -54,6 +61,11 @@ export class AuthService {
     
       localStorage.setItem('authToken', JSON.stringify(jwt));
       this.userSubject.next(jwt);
+  }
+
+  getJWT(): JWT{
+    var jwt : JWT = JSON.parse(localStorage.getItem("authToken")!);
+    return jwt;
   }
   logout() {
     // remove user from local storage to log user out

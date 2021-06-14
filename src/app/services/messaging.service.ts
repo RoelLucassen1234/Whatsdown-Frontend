@@ -40,7 +40,7 @@ export class MessagingService {
   }
   
   public SendTextMessage(message : MessageView){
-    return this.http.post<any>(`${environment.apiUrl}/api/chat/post/text`, message).subscribe()
+    return this.http.post<any>(`${environment.apiUrl}/api/chat/post/text`, message);
   }
 
   public SendImageMessage(data : any){

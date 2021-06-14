@@ -10,6 +10,8 @@ import { RegisterComponent } from './register/register.component';
 import { MenuComponent } from './menu/menu.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { NotifierModule } from 'angular-notifier';
+import { AuthInterceptor } from './helpers/auth.interceptor';
 
 
 @NgModule({
@@ -26,9 +28,11 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    [RouterModule]
+    RouterModule,
+    NotifierModule
   ],
-  providers: [ {provide: LocationStrategy, useClass: HashLocationStrategy}],
+  providers: [ {provide: LocationStrategy, useClass: HashLocationStrategy},
+     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi : true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

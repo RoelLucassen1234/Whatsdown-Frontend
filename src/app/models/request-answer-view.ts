@@ -1,4 +1,4 @@
 export class RequestAnswerView {
 
-    constructor(public RelationshipId : string , public ProfileId: string){}
+    constructor(public RelationshipId : string){}
 }

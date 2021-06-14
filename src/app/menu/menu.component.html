@@ -1,13 +1,4 @@
-<html>
 
-<head>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script type="text/javascript" language="javascript" src="../JS/bmwcustom.js"></script>
-</head>
-
-<body>
-   
     <div id="container">
         <div *ngIf="!menuIsActive" [@inOutAnimation] class="profilemenu">
             <div class="returnProfile" (click)="toggle()">
@@ -240,12 +231,12 @@
                 </div>
             </div>
 
-
+            <notifier-container></notifier-container>
            
         </div>
-
+    
     </div>
-
+ 
     <script>
 
         function openTab(evt, tabName) {
@@ -278,6 +269,3 @@
             evt.currentTarget.className += " active";
         }
     </script>
-</body>
-
-</html>

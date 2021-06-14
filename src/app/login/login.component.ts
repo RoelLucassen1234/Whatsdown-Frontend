@@ -54,8 +54,13 @@ export class LoginComponent implements OnInit , AfterViewInit {
        this.router.navigate(['menu'])
        
     }, error => {
-      this.error = error.error;
-      console.log(error);
+      console.log(error.status)
+      if (error.statusText == "Unknown Error")
+      this.error ="We are currently experiencing problems. Try again later." 
+      if (error.status == 502)
+      this.error = "We are currently experiencing problems. Try again later."
+      if (error.status == 400)
+      this.error = error.error
     })
 
   }
@@ -66,8 +71,9 @@ export class LoginComponent implements OnInit , AfterViewInit {
     this.authService.loginViaGoogle(googleUser.getAuthResponse().id_token).subscribe(loggedIn => {
       this.router.navigate(['menu'])
     }, error => {
-      this.error = error.error;
-      console.error(error);
+      if (error.statusText == "Unknown Error")
+      this.error ="We are currently experiencing problems. Try again later." 
+      console.error(error.statusText);
     })
   }
 

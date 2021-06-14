@@ -18,9 +18,9 @@ export class FriendService {
     return this.http.get<any>(`${environment.apiUrl}/friends/potential`+ name)
    }
 
-   getPendingRequests(userId : string){
-    let params = new HttpParams().set("userId",userId);
-    return this.http.get<FriendRequestViewModel>(`${environment.apiUrl}/api/friends/pending/`+ userId)
+   getPendingRequests(){
+
+    return this.http.get<FriendRequestViewModel>(`${environment.apiUrl}/api/friends/pending`)
    }
 
    sendFriendRequest(userId : string, friendId: string){
@@ -30,17 +30,17 @@ export class FriendService {
     return this.http.post<any>(`${environment.apiUrl}/api/friends/request`, model)
    }
 
-   acceptFriendRequest(relationshipId : string, profileId : string){
-    var model :  RequestAnswerView = new RequestAnswerView(relationshipId,profileId);
+   acceptFriendRequest(relationshipId : string){
+    var model :  RequestAnswerView = new RequestAnswerView(relationshipId);
     return this.http.put<any>(`${environment.apiUrl}/api/friends/accept`, model);
    }
    declineFriendRequest(relationshipId : string, profileId : string){
-    var model :  RequestAnswerView = new RequestAnswerView(relationshipId,profileId);
+    var model :  RequestAnswerView = new RequestAnswerView(relationshipId);
     return this.http.put<any>(`${environment.apiUrl}/api/friends/decline`, model).subscribe();
    }
 
-   getFriends(profileId : string){
-     return this.http.get<any>(`${environment.apiUrl}/api/friends/`+ profileId)
+   getFriends(){
+     return this.http.get<any>(`${environment.apiUrl}/api/friends`)
    }
 }
 
