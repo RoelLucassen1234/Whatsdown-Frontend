@@ -292,6 +292,7 @@ export class MenuComponent implements OnInit {
         profile.messages = data.messages;
         this.messages = profile.messages;
       });
+      console.log("Setting up contact profile.")
       this.contact = profile.profile;
 
     }
