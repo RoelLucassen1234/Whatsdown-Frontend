@@ -63,6 +63,7 @@ export class MenuComponent implements OnInit {
   profileIds: string[] = [];
   myProfile: User;
   profile : Profile;
+  contact : Profile;
   jwt: JWT;
   message !: string;
   searchdata: FormGroup;
@@ -291,6 +292,7 @@ export class MenuComponent implements OnInit {
         profile.messages = data.messages;
         this.messages = profile.messages;
       });
+      this.contact = profile.profile;
 
     }
     this.messages = profile.messages;

@@ -15,7 +15,7 @@
             </div>
             <div id="personal-contact-profile-name">
                 <span>Your status</span>
-                <input type="text" id="fname" value="{{this.profile.status}}" name="fname">
+                <input type="text" id="fstatus" value="{{this.profile.status}}" name="fstatus">
             </div>
             <div id="pending-container">
                 <span id="pending-container-span">Pending Requests</span>
@@ -212,18 +212,19 @@
                 </div>
            </div>
             <div id="group2">
-                <div id="contactprofile">
-                    <div id="contact-profile-image">
+                <div id="contactprofile" >
+                    <div id="contact-profile-image" *ngIf="this.contact">
                         <img src="../../assets/img/duck.jpg">
-                        <p class="contact-profile-image-name">Product</p>
-                        <p class="contact-profile-image-status">The status of the contact/group</p>
+                        <p class="contact-profile-image-name">{{this.contact.displayName}}</p>
+                        <p class="contact-profile-image-status">{{this.contact.status}}</p>
                     </div>
+    
                     <div id="contact-profile-actions">
-                        <div id="contact-profile-actions-buttons"> 
+                        <div id="contact-profile-actions-buttons" *ngIf="this.contact"> 
                             <button style="margin-right: 5px;"> Remove Friend</button>
                             <button> Block Friend</button>
                         </div>
-                        <div id="contact-profile-actions-buttons"> 
+                        <div id="contact-profile-actions-buttons" *ngIf="this.contact"> 
                             <button style="margin-right: 5px;"> Favorite Friend</button>
                         </div>
 
