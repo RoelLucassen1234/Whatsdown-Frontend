@@ -15,6 +15,7 @@ import { MessageView } from '../models/message-view';
 import { PartlyPendingRequests } from '../models/partly-pending-requests';
 import { PendingRequest } from '../models/pending-request';
 import { PotentialContactView } from '../models/potential-contact-view';
+import { Profile } from '../models/profile';
 import { RecentMessageView } from '../models/recent-message-view';
 import { User } from '../models/user';
 import { AuthService } from '../services/auth.service';
@@ -61,6 +62,7 @@ export class MenuComponent implements OnInit {
   currentGroupCode = '';
   profileIds: string[] = [];
   myProfile: User;
+  profile : Profile;
   jwt: JWT;
   message !: string;
   searchdata: FormGroup;
@@ -85,6 +87,10 @@ export class MenuComponent implements OnInit {
 
     this.jwt = this.authService.userValue;
     this.messageService.startConnection().then(() => {
+      this.profileService.GetProfile(this.authService.getJWT().id).subscribe((data : any)=>{
+        console.log("Setting up personal profile.")
+        this.profile = data.profile;
+      } )
       this.getFriends();
       this.messageService.retrieveMappedObject().subscribe((receivedObj: MessageReturnView) => { this.addToInbox(receivedObj) });  // calls the service method to get the new messages sent
     }).catch(error => {
@@ -238,19 +244,20 @@ export class MenuComponent implements OnInit {
 
       let PartlyPendingRequests: Array<PartlyPendingRequests> = [];
       PartlyPendingRequests = requests.pendingRequests;
+      console.log("Testing list of pending requests: ");
       console.log(PartlyPendingRequests.length);
 
       PartlyPendingRequests.forEach(element => {
         var teststring = element.profileId;
 
-        this.profileService.GetProfile(teststring.toString()).subscribe((data: any) => {
+        this.profileService.GetProfile(teststring).subscribe((data: any) => {
           this.pendingRequests.push(new PendingRequest(data.profile.displayName, data.profile.displayName, element.relationId))
           console.log(this.pendingRequests);
           this.pendingRequests.filter(function (obj){
 
           })
         }, error => {
-          this.readErrorMessage(error);
+   
         })
       });
     }, error => {

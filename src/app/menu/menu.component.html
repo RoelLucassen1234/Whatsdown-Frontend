@@ -11,11 +11,11 @@
             </div>
             <div id="personal-contact-profile-name">
                 <span>Your name</span>
-                <input type="text" id="fname" value="Not implemented" name="fname">
+                <input type="text" id="fname" value="{{this.profile.displayName}}" name="fname">
             </div>
             <div id="personal-contact-profile-name">
                 <span>Your status</span>
-                <input type="text" id="fname" value="Not implemented" name="fname">
+                <input type="text" id="fname" value="{{this.profile.status}}" name="fname">
             </div>
             <div id="pending-container">
                 <span id="pending-container-span">Pending Requests</span>
@@ -41,8 +41,8 @@
                     <img src="../../assets/img/duck.jpg">
                 </div>
                 <div id="personal-profile-status">
-                    <div><span>Personal name</span></div>
-                <div><span style="font-size:12px;"><i>Status, a long statusddddddddddddddddddd</i></span></div>
+                    <div><span>{{profile.displayName}}</span></div>
+                <div><span style="font-size:12px;"><i>{{profile.status}}</i></span></div>
                 </div> 
                 <div id="profile-options-button" (click)="toggleSearchMenu()">
                     <img src="../../assets/img/icons8-menu-48 (1).png">

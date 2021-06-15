@@ -19,7 +19,7 @@ export class FriendService {
    }
 
    getPendingRequests(){
-
+    
     return this.http.get<FriendRequestViewModel>(`${environment.apiUrl}/api/friends/pending`)
    }
 
