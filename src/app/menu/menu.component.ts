@@ -117,7 +117,7 @@ export class MenuComponent implements OnInit {
 
   async getFriends() {
 
-    await this.friendService.getFriends().subscribe(async (data: any) => {
+     this.friendService.getFriends().subscribe(async (data: any) => {
       let test: FriendViewModel[] = [];
       let basicFriends: BasicFriendView[] = [];
       basicFriends = data.friend;
