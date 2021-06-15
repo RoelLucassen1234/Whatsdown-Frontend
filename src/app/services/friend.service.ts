@@ -41,7 +41,7 @@ export class FriendService {
 
    removeFriendRequest(profileId : string){
     let params = new HttpParams().set("friendId",profileId);
-    return this.http.put<any>(`${environment.apiUrl}/api/friends/remove`, {params});
+    return this.http.put<any>(`${environment.apiUrl}/api/friends/remove/` + profileId, {params});
    }
 
    getFriends(){
