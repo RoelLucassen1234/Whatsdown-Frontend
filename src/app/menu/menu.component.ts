@@ -238,13 +238,17 @@ export class MenuComponent implements OnInit {
 
       let PartlyPendingRequests: Array<PartlyPendingRequests> = [];
       PartlyPendingRequests = requests.pendingRequests;
-
+      console.log(PartlyPendingRequests.length);
 
       PartlyPendingRequests.forEach(element => {
         var teststring = element.profileId;
 
         this.profileService.GetProfile(teststring.toString()).subscribe((data: any) => {
           this.pendingRequests.push(new PendingRequest(data.profile.displayName, data.profile.displayName, element.relationId))
+          console.log(this.pendingRequests);
+          this.pendingRequests.filter(function (obj){
+
+          })
         }, error => {
           this.readErrorMessage(error);
         })
