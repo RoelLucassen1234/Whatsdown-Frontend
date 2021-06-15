@@ -39,6 +39,11 @@ export class FriendService {
     return this.http.put<any>(`${environment.apiUrl}/api/friends/decline`, model).subscribe();
    }
 
+   removeFriendRequest(profileId : string){
+    let params = new HttpParams().set("friendId",profileId);
+    return this.http.put<any>(`${environment.apiUrl}/api/friends/remove`, {params});
+   }
+
    getFriends(){
      return this.http.get<any>(`${environment.apiUrl}/api/friends`)
    }

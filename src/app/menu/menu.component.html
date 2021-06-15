@@ -221,7 +221,7 @@
     
                     <div id="contact-profile-actions">
                         <div id="contact-profile-actions-buttons" *ngIf="this.contact"> 
-                            <button style="margin-right: 5px;"> Remove Friend</button>
+                            <button style="margin-right: 5px;" (click)="RemoveFriend(this.contact.profileId)"> Remove Friend</button>
                             <button> Block Friend</button>
                         </div>
                         <div id="contact-profile-actions-buttons" *ngIf="this.contact"> 

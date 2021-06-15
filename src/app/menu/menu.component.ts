@@ -284,6 +284,14 @@ export class MenuComponent implements OnInit {
     });
   }
 
+  RemoveFriend(profileId : string){
+    console.log(profileId);
+    this.friendService.removeFriendRequest(profileId).subscribe((data : any) => {
+      this.friends.filter(function (obj) {
+        return obj.profileId !== profileId;
+      })})
+    }
+
   selectContact(profile: FriendViewModel) {
     this.currentGroupCode = profile.identificationCode;
     if (profile.messages == null) {
@@ -372,6 +380,10 @@ export class MenuComponent implements OnInit {
       this.readErrorMessage(error);
     });
   }
+
+
+
+
 
   autogrow() {
     let textArea = <any>document.getElementById("message");
