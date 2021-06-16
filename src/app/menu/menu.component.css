@@ -283,10 +283,7 @@
     margin: auto;
     cursor: pointer;
 }
-#profile-options-button img {
-    width: 20px;
-    height: 20px;
-}
+
 .profilemenu {
     position: absolute;
     height: 800px;
@@ -296,10 +293,10 @@
 }
 
 .search-menu {
-    position: absolute;
+    position:absolute;
     height: 800px;
     width: 635px;
-    background-color: rgb(38, 39, 36);
+    background-color: #303030;
     z-index: 10;
     overflow: hidden;
 }
@@ -378,7 +375,7 @@
     width: 260px;
     height: 400px;
     margin: 25px auto 0 auto;
-    background-color: rgb(14, 12, 11);
+    background-color: rgb(114, 112, 112);
     overflow: auto;
 }
 

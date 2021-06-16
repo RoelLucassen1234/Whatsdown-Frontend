@@ -41,11 +41,11 @@
                     <img src="../../assets/img/duck.jpg">
                 </div>
                 <div id="personal-profile-status">
-                    <div><span>{{profile.displayName}}</span></div>
-                <div><span style="font-size:12px;"><i>{{profile.status}}</i></span></div>
+                    <div><span>{{profile?.displayName}}</span></div>
+                <div><span style="font-size:12px;"><i>{{profile?.status}}</i></span></div>
                 </div> 
                 <div id="profile-options-button" (click)="toggleSearchMenu()">
-                    <img src="../../assets/img/icons8-menu-48 (1).png">
+                    <img src="../../assets/img/outline_person_add_white_36dp.png">
                 </div>
             </div>
 
@@ -181,7 +181,7 @@
                 <div id="contact-conversation">
 
                     <div class="messsage" *ngFor="let item of this.messages; "> 
-                        <div [ngClass]="item.profileId == profile.profileId ? 'MyMessage':''">
+                        <div [ngClass]="item.profileId == jwt.id ? 'MyMessage':''">
                          <div *ngIf="item.type == 'TEXT'">
                           
                             <span>{{item.message}}</span>   
