@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit , AfterViewInit {
       'width': 240,
       'height': 50,
       'longtitle': true,
+      'hosted_domain': "whatsdown.nl",
       'theme': 'light',
       'onsuccess': (param: any) => this.googleSignin(param)
   });
