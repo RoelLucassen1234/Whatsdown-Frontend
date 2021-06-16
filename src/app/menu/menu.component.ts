@@ -285,10 +285,10 @@ export class MenuComponent implements OnInit {
   }
 
   RemoveFriend(profileId : string){
-    console.log(profileId);
-    this.friendService.removeFriendRequest(profileId).subscribe((data : any) => {
 
-      this.friends.filter(x => x.profileId != profileId);
+    this.friendService.removeFriendRequest(profileId).subscribe((data : any) => {
+      console.log("Successfully renoved friend request");
+      this.friends = this.friends.filter(x => x.profileId != profileId);
     }
     )}
 
