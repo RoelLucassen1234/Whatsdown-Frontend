@@ -181,7 +181,7 @@
                 <div id="contact-conversation">
 
                     <div class="messsage" *ngFor="let item of this.messages; "> 
-                        <div [ngClass]="item.profileId == jwt.id ? 'MyMessage':''">
+                        <div [ngClass]="item.profileId == profile.profileId ? 'MyMessage':''">
                          <div *ngIf="item.type == 'TEXT'">
                           
                             <span>{{item.message}}</span>   
